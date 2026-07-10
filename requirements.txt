@@ -3,3 +3,4 @@ asyncpg
 jdatetime
 openpyxl
 python-dotenv
+flask
