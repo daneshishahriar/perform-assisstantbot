@@ -2,3 +2,4 @@ python-telegram-bot
 asyncpg
 jdatetime
 openpyxl
+python-dotenv
