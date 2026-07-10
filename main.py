@@ -1,3 +1,7 @@
+import threading
+
+from flask import Flask
+
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -202,6 +206,45 @@ async def text_handler(update, context):
         )
 
         return
+
+
+
+# ==========================
+# سرور وب برای باز نگه داشتن پورت (Render)
+# ==========================
+
+web_app = Flask('')
+
+
+@web_app.route('/')
+def home():
+    return "ربات پرفورم روشن است ✅"
+
+
+def run_web():
+
+    import os
+
+    port = int(
+        os.environ.get(
+            "PORT",
+            10000
+        )
+    )
+
+    web_app.run(
+        host="0.0.0.0",
+        port=port
+    )
+
+
+def keep_alive():
+
+    t = threading.Thread(
+        target=run_web
+    )
+
+    t.start()
 
 
 
@@ -745,6 +788,9 @@ def main():
         )
     )
 
+
+
+    keep_alive()
 
 
     print(
